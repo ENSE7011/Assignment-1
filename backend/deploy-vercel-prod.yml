@@ -1,7 +1,7 @@
 name: GitHub Actions Deploy Backend To Vercel Prod
 env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_ORG_ID: team_yvQ4u76TKmU15P6zyHzRNwZk
+  VERCEL_PROJECT_ID: prj_15ij1go4CC0jnmkrbMWHHm4F2db6
 
 on:
   push:
@@ -19,8 +19,8 @@ jobs:
       - name: install vercel cli node.js
         run: npm install --global vercel@canary
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=$nhfeo0HOUa6eEw5SGQsvpXHe
+        run: vercel pull --yes --environment=production --token=nhfeo0HOUa6eEw5SGQsvpXHe
       - name: Build Project Artifacts
-        run: vercel build --prod --token=$nhfeo0HOUa6eEw5SGQsvpXHe
+        run: vercel build --prod --token=nhfeo0HOUa6eEw5SGQsvpXHe
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=$nhfeo0HOUa6eEw5SGQsvpXHe
+        run: vercel deploy --prebuilt --prod --token=nhfeo0HOUa6eEw5SGQsvpXHe

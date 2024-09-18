@@ -1,7 +1,7 @@
 name: GitHub Actions Deploy Backend To Vercel Preview
 env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_ORG_ID: team_yvQ4u76TKmU15P6zyHzRNwZk
+  VERCEL_PROJECT_ID: prj_15ij1go4CC0jnmkrbMWHHm4F2db6
 
 on:
   push:
