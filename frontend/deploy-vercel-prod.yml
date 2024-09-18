@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    uses: ENSE7011/Assignment-1/.github/workflows/lint-build-test.yml@release
+    uses: ENSE7011/Assignment-1/frontend/lint-build-test-frontend.yml@release
 
   deploy-prod-backend:
     needs: test
