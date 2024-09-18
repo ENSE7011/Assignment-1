@@ -8,8 +8,8 @@ on:
 
 jobs:
   lint-test-use-backend:
-    uses: ENSE7011/Assignment-1/backend/lint-build-test-backend.yml
+    uses: ENSE7011/Assignment-1/backend/lint-build-test-backend.yml@main
 
   lint-test-use-frontend:
     needs: lint-test-use-backend
-    uses: ENSE7011/Assignment-1/backend/lint-build-test-frontend.yml
+    uses: ENSE7011/Assignment-1/backend/lint-build-test-frontend.yml@main
