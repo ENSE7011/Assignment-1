@@ -4,8 +4,7 @@ env:
   VERCEL_PROJECT_ID: prj_15ij1go4CC0jnmkrbMWHHm4F2db6
 
 on:
-  push:
-    branches: ["main"]
+  workflow_call:
 
 jobs:
   deploy-preview-backend:
