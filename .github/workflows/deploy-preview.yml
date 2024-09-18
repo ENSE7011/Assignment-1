@@ -1,0 +1,17 @@
+name: GitHub Actions Deploy Preview
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  test:
+    uses: ENSE7011/Assignment-1/.github/workflows/lint-build-test.yml@main
+
+  deploy-preview-backend:
+    needs: test
+    uses: ENSE7011/Assignment-1/.github/workflows/deploy-backend-vercel-preview.yml@main
+
+  deploy-preview-frontend:
+    needs: [test, deploy-preview-backend]
+    uses: ENSE7011/Assignment-1/.github/workflows/deploy-frontend-vercel-preview.yml@main
