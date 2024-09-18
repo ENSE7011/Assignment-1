@@ -5,6 +5,7 @@ on:
     branches: ["test"]
   pull_request:
     types: [opened, synchronize, reopened, edited]
+  workflow_call:
 
 jobs:
   lint-backend:
