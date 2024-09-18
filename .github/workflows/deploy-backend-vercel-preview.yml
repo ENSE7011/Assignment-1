@@ -5,11 +5,14 @@ env:
 
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
 
 jobs:
   deploy-preview-backend:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - uses: actions/checkout@v3
       - name: install vercel cli node.js

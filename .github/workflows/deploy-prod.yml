@@ -10,8 +10,8 @@ jobs:
 
   deploy-prod-backend:
     needs: test
-    uses: ENSE7011/Assignment-1/frontend/deploy-vercel-prod.yml@release
+    uses: ENSE7011/Assignment-1/.github/workflows/deploy-backend-vercel-prod.yml@release
 
   deploy-prod-frontend:
-    needs: deploy-prod-backend
-    uses: ENSE7011/Assignment-1/backend/deploy-vercel-prod.yml@release
+    needs: [test, deploy-prod-backend]
+    uses: ENSE7011/Assignment-1/.github/workflows/deploy-frontend-vercel-prod.yml@release

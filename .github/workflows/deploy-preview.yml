@@ -10,8 +10,8 @@ jobs:
 
   deploy-preview-backend:
     needs: test
-    uses: ENSE7011/Assignment-1/frontend/deploy-vercel-preview.yml@main
+    uses: ENSE7011/Assignment-1/.github/workflows/deploy-backend-vercel-preview.yml@main
 
   deploy-preview-frontend:
-    needs: deploy-preview-backend
-    uses: ENSE7011/Assignment-1/backend/deploy-vercel-preview.yml@main
+    needs: [test, deploy-preview-backend]
+    uses: ENSE7011/Assignment-1/.github/workflows/deploy-frontend-vercel-preview.yml@main

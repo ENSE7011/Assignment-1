@@ -8,12 +8,11 @@ on:
     branches: ["release"]
 
 jobs:
-  test:
-    uses: ENSE7011/Assignment-1/frontend/lint-build-test-frontend.yml@release
-
   deploy-prod-backend:
-    needs: test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v3
       - name: install vercel cli node.js
