@@ -9,9 +9,9 @@ on:
 jobs:
   deploy-prod-backend:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
+    # defaults:
+    #   run:
+    #     working-directory: frontend
     steps:
       - uses: actions/checkout@v3
       - name: install vercel cli node.js
