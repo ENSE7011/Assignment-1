@@ -1,136 +1,108 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useRouter } from 'next/navigation';
+'use client';
+
 import Link from 'next/link';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Book, DefaultEmptyBook } from './Book';
 
 const CreateBookComponent = () => {
-  const navigate = useRouter();
-
-  const [book, setBook] = useState < Book > (DefaultEmptyBook);
+  const [book, setBook] = useState<Book>(DefaultEmptyBook);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     setBook({ ...book, [event.target.name]: event.target.value });
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(book);
-    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/books", { method: 'POST', headers: { "Content-Type": "application/json" }, body: JSON.stringify(book) })
+    event.preventDefault();
+
+    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/api/books', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(book),
+    })
       .then((res) => {
-        console.log(res);
         setBook(DefaultEmptyBook);
-        // Push to /
-        navigate.push("/");
       })
       .catch((err) => {
-        console.log('Error from CreateBook: ' + err);
+        console.error('Error while creating book: ', err);
       });
   };
 
   return (
-    <div
-      className="CreateBook">
-      <div
-        className="container">
-        <div
-          className="row">
-          <div
-            className="col-md-8 m-auto">
-            <br />
-            <Link
-              href="/"
-              className="btn btn-outline-warning float-left">
-              Show Book List
-            </Link>
+    <div className="min-h-screen flex items-center justify-center bg-gray-800 text-white">
+      <div className="w-full max-w-md mx-auto bg-gray-900 rounded-lg shadow-lg p-8">
+        <Link href="/" className="block mb-4 text-center bg-blue-600 py-2 rounded-lg">
+          Show Book List
+        </Link>
+        <h2 className="text-2xl font-bold mb-6 text-center">Add Book</h2>
+        <form onSubmit={onSubmit}>
+          <div className="mb-4">
+            <input
+              type="text"
+              name="title"
+              placeholder="Title of the Book"
+              value={book.title}
+              onChange={onChange}
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
-          <div
-            className="col-md-10 m-auto">
-            <h1
-              className="display-4 text-center">Add Book</h1>
-            <p
-              className="lead text-center">Create new book</p>
-            <form
-              noValidate onSubmit={onSubmit}>
-              <div
-                className="form-group">
-                <input
-                  type="text"
-                  placeholder="Title of the Book"
-                  name="title"
-                  className="form-control"
-                  value={book.title}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div
-                className="form-group">
-                <input
-                  type="text"
-                  placeholder="ISBN"
-                  name="isbn"
-                  className="form-control"
-                  value={book.isbn}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div
-                className="form-group">
-                <input
-                  type="text"
-                  placeholder="Author"
-                  name="author"
-                  className="form-control"
-                  value={book.author}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div
-                className="form-group">
-                <input
-                  type="text"
-                  placeholder="Describe this book"
-                  name="description"
-                  className="form-control"
-                  value={book.description}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div
-                className="form-group">
-                <input
-                  type="date"
-                  placeholder="published_date"
-                  name="published_date"
-                  className="form-control"
-                  value={book.published_date?.toString()}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div
-                className="form-group">
-                <input
-                  type="text"
-                  placeholder="Publisher of this Book"
-                  name="publisher"
-                  className="form-control"
-                  value={book.publisher}
-                  onChange={onChange}
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn btn-outline-warning btn-block mt-4 mb-4 w-100"
-              >
-                Submit
-              </button>
-            </form>
+          <div className="mb-4">
+            <input
+              type="text"
+              name="isbn"
+              placeholder="ISBN"
+              value={book.isbn}
+              onChange={onChange}
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
-        </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              name="author"
+              placeholder="Author"
+              value={book.author}
+              onChange={onChange}
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              name="description"
+              placeholder="Describe this book"
+              value={book.description}
+              onChange={onChange}
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="mb-4">
+            <input
+              type="date"
+              name="published_date"
+              value={book.published_date?.toString()}
+              onChange={onChange}
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="mb-6">
+            <input
+              type="text"
+              name="publisher"
+              placeholder="Publisher of this Book"
+              value={book.publisher}
+              onChange={onChange}
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     </div>
   );
