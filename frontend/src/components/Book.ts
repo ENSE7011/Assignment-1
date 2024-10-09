@@ -1,21 +1,29 @@
 export type Book = {
-  _id?: string;
-  title?: string;
-  isbn?: string;
-  author?: string;
-  description?: string;
-  published_date?: Date;
-  publisher?: string;
-  updated_date?: Date;
-};
+  _id?: string
+  title?: string
+  doi?: string
+  author?: string
+  description?: string
+  published_year?: string
+  journal?: string
+  updated_date?: Date
+  volume?: string
+  number?: number
+  pages?: string
+  claim_evidence?: string[]
+}
 
 export const DefaultEmptyBook: Book = {
   _id: undefined,
-  title: '',
-  isbn: '',
-  author: '',
-  description: '',
-  published_date: undefined,
-  publisher: '',
-  updated_date: undefined
+  title: "",
+  doi: "",
+  author: "",
+  description: "",
+  published_year: undefined,
+  journal: "",
+  updated_date: undefined,
+  volume: "",
+  number: undefined,
+  pages: "",
+  claim_evidence: undefined,
 }
