@@ -19,6 +19,7 @@ export interface Moderator extends Accounts {
     {
       article_id: string;
       date_modded: Date;
+      moderation_status: string;
     },
   ];
 }
@@ -33,8 +34,9 @@ export interface Analyst extends Accounts {
 
 export interface Claims {
   method: string | null;
-  status: string | null;
+  support: string | null;
   reviewer: Analyst | null;
+  rating: number[] | null;
 }
 export interface Articles {
   _id: string;
@@ -51,7 +53,6 @@ export interface Articles {
   claim_evidence?: Claims[];
   rating?: number;
 }
-
 // {'code improvement':'strong support'},
 // {'product improvement': 'weak against'},
 // {'team improvement': 'none'},
