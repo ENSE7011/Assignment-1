@@ -1,11 +1,11 @@
 'use client'
 
-import AddClaimReviewComponent from "@/components/AddClaimReview";
+import AddClaimReview from "@/components/AddClaimReview";
 
-export default function AddClaimReview() {
+export default function AddClaimReviewComponent() {
   return (
     <main>
-      <AddClaimReviewComponent />
+      <AddClaimReview />
     </main>
   );
 }

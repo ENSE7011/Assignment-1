@@ -14,27 +14,45 @@ interface ClaimProp {
 interface UIClaimItemProp {
   method: string;
   support: number;
-  id: string;
+  id: number;
 }
 
 
-const ClaimsCard = ({ claims, articleId }: ClaimProp) => {
+export default ClaimsCard = ({ claims, articleId }: ClaimProp) => {
   const router = useRouter();
+
+  const [article, setArticle] = useState < Article > (DefaultEmptyArticle);
 
   if (claims?.length === 0) {
     return null;
   };
 
-  const method_set = new Set(claims.map((claimItem) => { return claimItem.method }));
+  const method_set = new Set(claims?.map((claimItem) => { return claimItem.method }));
   console.log("methods: ", method_set);
 
   let uiClaim: UIClaimItemProp = {
-    method: claims?.at(0)?.method,
-    support: claims?.at(0)?.support,
+    method: claims?.at(0)?.method ?? "",
+    support: claims?.at(0)?.support ?? -5,
     id: 0,
   }
 
+  useEffect(() => {
+    (async () => {
+      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`)
+        .then((res) => res.json())
+        .then((data) => setArticle(data))
+        .catch((err) => console.log('Error fetching article:', err));
+    })();
+  }, [articleId]);
+
   const onClick = async (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, {
+      method: 'GET',
+      headers: { "Content-Type": "application/json" }
+    })
+      .then((res) => res.json())
+      .then((data) => setArticle(data))
+      .catch((err) => console.log('Error fetching article:', err));
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, {
       method: 'PUT',
       headers: { "Content-Type": "application/json" },
@@ -45,11 +63,13 @@ const ClaimsCard = ({ claims, articleId }: ClaimProp) => {
   };
 
   function updateUIClaim(c: Claim): void {
-    uiClaim = {
-      method: c.method,
-      support: c.support,
-      id: claims.findIndex(c),
-    };
+    if (c) {
+      uiClaim = {
+        method: c.method,
+        support: c.support,
+        id: claims?.findIndex(c) ?? -1,
+      };
+    }
   }
 
   return (
@@ -75,5 +95,3 @@ const ClaimsCard = ({ claims, articleId }: ClaimProp) => {
     </div>
   );
 }
-
-export default ClaimsCard;
