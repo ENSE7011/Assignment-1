@@ -74,52 +74,58 @@ const AddClaimReview = () => {
     return (ce?.length > 0) ? (ce[tempId]?.ratings?.length > 0 ? ce[tempId]?.ratings : null) : null;
   };
 
-  const StarRatingLayout = (!hasRatings()) ? (
-    <div className="col-md-8 m-auto">
-      <h1 className="display-4 text-center">Claim Stats</h1>
-      <div>This Claim has not been rated yet</div>
-    </div>
-  ) : (
-    <div className="col-md-8 m-auto">
-      <h1 className="display-4 text-center">Claim Stats</h1>
-      <div className='meanBox'>
-        <div>Mean</div>
-        <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).mean_rating} size={24} colour={['#3399FF']} />
-      </div>
-      <div className='medianBox'>
-        <div>Median</div>
-        <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).median_rating} size={24} colour={['#3366FF']} />
-      </div>s
-      <div className='modeBox'>
-        <div>Mode</div>
-        <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).mode_rating} size={24} colour={['#0033FF']} />
-      </div>
-      <br />
-      <StarRating rating={5} size={24} colour={['#FF0000', '#FF6F00', '#FFA500', '#FFD700', '#00FF00']} />
-      <div className='claimPerStar'>
-        <div className='star1'>
-          <div>1</div>
-          <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[0].user_ratings}</div>
+  const StarRatingLayout = (): React.JSX.Element => {
+    if (!hasRatings()) {
+      return (
+        <div className="col-md-8 m-auto">
+          <h1 className="display-4 text-center">Claim Stats</h1>
+          <div>This Claim has not been rated yet</div>
         </div>
-        <div className='star2'>
-          <div>2</div>
-          <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[1].user_ratings}</div>
+      );
+    } else {
+      return (
+        <div className="col-md-8 m-auto">
+          <h1 className="display-4 text-center">Claim Stats</h1>
+          <div className='meanBox'>
+            <div>Mean</div>
+            <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).mean_rating} size={24} colour={['#3399FF']} />
+          </div>
+          <div className='medianBox'>
+            <div>Median</div>
+            <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).median_rating} size={24} colour={['#3366FF']} />
+          </div>s
+          <div className='modeBox'>
+            <div>Mode</div>
+            <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).mode_rating} size={24} colour={['#0033FF']} />
+          </div>
+          <br />
+          <StarRating rating={5} size={24} colour={['#FF0000', '#FF6F00', '#FFA500', '#FFD700', '#00FF00']} />
+          <div className='claimPerStar'>
+            <div className='star1'>
+              <div>1</div>
+              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[0].user_ratings}</div>
+            </div>
+            <div className='star2'>
+              <div>2</div>
+              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[1].user_ratings}</div>
+            </div>
+            <div className='star3'>
+              <div>3</div>
+              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[2].user_ratings}</div>
+            </div>
+            <div className='star4'>
+              <div>4</div>
+              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[3].user_ratings}</div>
+            </div>
+            <div className='star5'>
+              <div>5</div>
+              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[4].user_ratings}</div>
+            </div>
+          </div>
         </div>
-        <div className='star3'>
-          <div>3</div>
-          <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[2].user_ratings}</div>
-        </div>
-        <div className='star4'>
-          <div>4</div>
-          <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[3].user_ratings}</div>
-        </div>
-        <div className='star5'>
-          <div>5</div>
-          <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[4].user_ratings}</div>
-        </div>
-      </div>
-    </div>
-  );
+      );
+    }
+  }
 
   return (
     <div className="col-md-8 m-auto">
