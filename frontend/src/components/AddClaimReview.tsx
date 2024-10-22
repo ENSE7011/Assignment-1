@@ -18,7 +18,7 @@ interface ArticleProp {
   article?: Article,
 }
 
-export default AddClaimReview = () => {
+const AddClaimReview = () => {
   const [article, setArticle] = useState < Article > (DefaultEmptyArticle);
   const { articleId, id } = useParams < { articleId: string, id: string } > ();
   let articleRatings: Rating[];
@@ -156,3 +156,6 @@ export default AddClaimReview = () => {
     </div>
   )
 }
+
+AddClaimReview.displayName = 'AddClaimReview';
+export default AddClaimReview;

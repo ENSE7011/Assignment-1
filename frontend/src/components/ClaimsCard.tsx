@@ -18,7 +18,7 @@ interface UIClaimItemProp {
 }
 
 
-export default ClaimsCard = ({ claims, articleId }: ClaimProp) => {
+const ClaimsCard = ({ claims, articleId }: ClaimProp) => {
   const router = useRouter();
 
   const [article, setArticle] = useState < Article > (DefaultEmptyArticle);
@@ -86,3 +86,6 @@ export default ClaimsCard = ({ claims, articleId }: ClaimProp) => {
     </div>
   );
 }
+
+ClaimsCard.displayName = 'ClaimsCard';
+export default ClaimsCard;
