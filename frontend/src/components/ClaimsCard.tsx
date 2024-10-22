@@ -58,7 +58,7 @@ const ClaimsCard = ({ claims, articleId }: ClaimProp) => {
       uiClaim = {
         method: c.method,
         support: c.support,
-        id: claims?.findIndex(c) ?? -1,
+        id: claims?.findIndex((cm) => (cm.journal_number === c.journal_number) && (cm.method === c.method) && (cm.support === c.support) && (cm.user_analyst === c.user_analyst) && (cm.volume === c.volume)) ?? -1,
       };
     }
   }
