@@ -64,8 +64,8 @@ const AddClaimReview = () => {
       .catch((err) => console.log('Error updating article:', err));
   };
 
-  let hasRatings = () => {
-    return article?.claim_evidence?.at(id)?.rating?.length > 0
+  let hasRatings = (): boolean => {
+    return article?.claim_evidence ? [id]?.rating?.length > 0
   }
 
   const StarRatingLayout = (hasRatings() === false) ? (
