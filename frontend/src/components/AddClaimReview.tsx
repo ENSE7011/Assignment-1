@@ -67,7 +67,7 @@ const AddClaimReview = () => {
       .catch((err) => console.log('Error updating article:', err));
   };
 
-  let hasRatings = (): Ratings[] | null => {
+  let hasRatings = (): Rating[] | null => {
     const ce: Claim[] = article?.claim_evidence ?? [];
     const tempId = parseInt(id ?? "-1");
     articleRatings = (ce?.length > 0) ? ce[tempId]?.ratings : [];
