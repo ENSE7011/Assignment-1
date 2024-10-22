@@ -12,24 +12,25 @@ interface ClaimProp {
 }
 
 interface UIClaimItemProp {
-  method: Method;
-  support: Support;
+  method: string;
+  support: number;
   id: string;
 }
 
 
 const ClaimsCard = ({ claims, articleId }: ClaimProp) => {
-  if (claims.length === 0) {
+  const router = useRouter();
+
+  if (claims?.length === 0) {
     return null;
   };
 
-  const router = useRouter();
   const method_set = new Set(claims.map((claimItem) => { return claimItem.method }));
   console.log("methods: ", method_set);
 
   let uiClaim: UIClaimItemProp = {
-    method: claims.at(0).method,
-    support: claims.at(0).support,
+    method: claims?.at(0)?.method,
+    support: claims?.at(0)?.support,
     id: 0,
   }
 
@@ -52,12 +53,12 @@ const ClaimsCard = ({ claims, articleId }: ClaimProp) => {
   }
 
   return (
-    <div className='claim-list-container'>  // column
+    <div className='claim-list-container'>
       <h1 className="display-4 text-center">SPEED Analysis</h1>
       <h3 className="display-4 text-center">Click on claim to add a rating or view the rating summary</h3>
       {method_set.forEach((methodName) => {
         const claimSub = claims.filter((claimItem) => claimItem.method === methodName);
-        <div className='claim-method-container'> // flex wrap
+        <div className='claim-method-container'>
           <h1 className="display-4 text-center">{methodName}</h1>
           {claimSub.map((item, index, k) => {
             let rating_average = CalculateRatingAverages(item.ratings).mean_rating;

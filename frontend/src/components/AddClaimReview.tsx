@@ -6,6 +6,7 @@ import { Article, DefaultEmptyArticle, Claim, Rating, Method, SubmissionStatus, 
 import { CalculateRatingAverages, CalculateRatingsByStar } from './RatingCalculations';
 import { error } from 'console';
 import StarRating from './StarRating';
+import Link from 'next/link';
 
 interface ClaimReviewProp {
   id: string,

@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { FaStar } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const StarRating = ({ rating: number, size: number, colour: string[] }) => {
+const StarRating = ({ rating: number, size: number, colour: string[], }) => {
   const totalStars = 5;
 
   let colourArray: string[];
