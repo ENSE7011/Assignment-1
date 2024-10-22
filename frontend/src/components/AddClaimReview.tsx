@@ -71,7 +71,7 @@ const AddClaimReview = () => {
     const ce: Claim[] = article?.claim_evidence ?? [];
     const tempId = parseInt(id ?? "-1");
     articleRatings = (ce?.length > 0) ? ce[tempId]?.ratings : [];
-    return (ce?.length > 0) ? ce[tempId]?.ratings > 0 : null;
+    return (ce?.length > 0) ? (ce[tempId]?.ratings?.length > 0 ? ce[tempId]?.ratings : null) : null;
   };
 
   const StarRatingLayout = (!hasRatings()) ? (
