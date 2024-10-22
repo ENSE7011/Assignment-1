@@ -67,11 +67,11 @@ const ClaimsCard = ({ claims, articleId }: ClaimProp) => {
     <div className='claim-list-container'>
       <h1 className="display-4 text-center">SPEED Analysis</h1>
       <h3 className="display-4 text-center">Click on claim to add a rating or view the rating summary</h3>
-      <React.JSX.Element {...method_set.forEach((methodName) => {
+      <div {...method_set.forEach((methodName) => {
         const claimSub = claims.filter((claimItem) => claimItem.method === methodName);
         <div className='claim-method-container'>
           <h1 className="display-4 text-center">{methodName}</h1>
-          <React.JSX.Element {...{
+          <div {...{
             ...claimSub.map((item, index, k) => {
               let rating_average = CalculateRatingAverages(item.ratings).mean_rating;
               <div className='claim-item-flex' key={k} onMouseEnter={updateUIClaim(item)} onClick={onClick}>
