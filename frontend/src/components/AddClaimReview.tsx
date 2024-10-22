@@ -51,7 +51,7 @@ const AddClaimReview = () => {
       throw error('Failed to provide a rating value', 400);
     }
 
-    articleRatings = article.claim_evidence[id].rating;
+    articleRatings = article?.claim_evidence.at(id)?.rating ?? [];
     articleRatings.push(uiRating);
     setArticle({ ...article, ['claim_evidence']: id, ['ratings']: articleRatings });
 
