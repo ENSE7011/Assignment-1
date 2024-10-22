@@ -48,7 +48,7 @@ const AddClaimReview = () => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!uiRating.user || !uiRating.rating) {
-      throw new error('Failed to provide a rating value', 400);
+      throw error('Failed to provide a rating value', 400);
     }
 
     articleRatings = article.claim_evidence[id].rating;
