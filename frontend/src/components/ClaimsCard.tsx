@@ -67,22 +67,23 @@ const ClaimsCard = ({ claims, articleId }: ClaimProp) => {
     <div className='claim-list-container'>
       <h1 className="display-4 text-center">SPEED Analysis</h1>
       <h3 className="display-4 text-center">Click on claim to add a rating or view the rating summary</h3>
-      {method_set.forEach((methodName) => {
+      <React.JSX.Element {...method_set.forEach((methodName) => {
         const claimSub = claims.filter((claimItem) => claimItem.method === methodName);
         <div className='claim-method-container'>
           <h1 className="display-4 text-center">{methodName}</h1>
-          {claimSub.map((item, index, k) => {
-            let rating_average = CalculateRatingAverages(item.ratings).mean_rating;
-
-            <div className='claim-item-flex' key={k} onMouseEnter={updateUIClaim(item)} onClick={onClick}>
-              <p>{item.support}</p>
-              <p>Analyst {item.user_analyst}</p>
-              <p>Evidence {item.journal_number} {item.volume} {item.pages}</p>
-              <p>Rating {rating_average}</p>
-            </div>;
-          })}
+          <React.JSX.Element {...{
+            ...claimSub.map((item, index, k) => {
+              let rating_average = CalculateRatingAverages(item.ratings).mean_rating;
+              <div className='claim-item-flex' key={k} onMouseEnter={updateUIClaim(item)} onClick={onClick}>
+                <p>{item.support}</p>
+                <p>Analyst {item.user_analyst}</p>
+                <p>Evidence {item.journal_number} {item.volume} {item.pages}</p>
+                <p>Rating {rating_average}</p>
+              </div>;
+            })
+          }} />
         </div>
-      })}
+      })} />
     </div>
   );
 }
