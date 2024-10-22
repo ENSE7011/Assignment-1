@@ -55,7 +55,8 @@ const AddClaimReview = () => {
     articleRatings = (ce?.length > 0) ? ce[parseInt(id)]?.ratings : [];
 
     articleRatings.push(uiRating);
-    setArticle({ ...article, ['claim_evidence']: parseInt(id), ['ratings']: articleRatings });
+    ce.ratings = articleRatings;
+    setArticle({ ...article, ['claim_evidence']: ce });
 
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, {
       method: 'PUT',
