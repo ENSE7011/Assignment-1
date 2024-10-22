@@ -52,7 +52,7 @@ const AddClaimReview = () => {
     }
 
     const ce = article?.claim_evidence ?? [];
-    articleRatings = (ce?.length > 0) ? ce[parseInt(id)]?.rating : [];
+    articleRatings = (ce?.length > 0) ? ce[parseInt(id)]?.ratings : [];
 
     articleRatings.push(uiRating);
     setArticle({ ...article, ['claim_evidence']: parseInt(id), ['ratings']: articleRatings });
@@ -69,8 +69,8 @@ const AddClaimReview = () => {
   let hasRatings = (): boolean => {
     const ce = article?.claim_evidence ?? [];
     const tempId = parseInt(id ?? "-1");
-    articleRatings = (ce?.length > 0) ? ce[tempId]?.rating : [];
-    return (ce?.length > 0) ? ce[tempId]?.rating?.length > 0 : false;
+    articleRatings = (ce?.length > 0) ? ce[tempId]?.ratings : [];
+    return (ce?.length > 0) ? ce[tempId]?.ratings?.length > 0 : false;
   };
 
   const StarRatingLayout = (hasRatings() === false) ? (
@@ -83,38 +83,38 @@ const AddClaimReview = () => {
       <h1 className="display-4 text-center">Claim Stats</h1>
       <div className='meanBox'>
         <div>Mean</div>
-        <StarRating rating={CalculateRatingAverages(article.claim_evidence[parseInt(id)].rating).mean_rating} size={24} color={['#3399FF']} />
+        <StarRating rating={CalculateRatingAverages(article.claim_evidence[parseInt(id)].ratings).mean_rating} size={24} color={['#3399FF']} />
       </div>
       <div className='medianBox'>
         <div>Median</div>
-        <StarRating rating={CalculateRatingAverages(article.claim_evidence[parseInt(id)].rating).median_rating} size={24} color={['#3366FF']} />
-      </div>
+        <StarRating rating={CalculateRatingAverages(article.claim_evidence[parseInt(id)].ratings).median_rating} size={24} color={['#3366FF']} />
+      </div>s
       <div className='modeBox'>
         <div>Mode</div>
-        <StarRating rating={CalculateRatingAverages(article.claim_evidence[parseInt(id)].rating).mode_rating} size={24} color={['#0033FF']} />
+        <StarRating rating={CalculateRatingAverages(article.claim_evidence[parseInt(id)].ratings).mode_rating} size={24} color={['#0033FF']} />
       </div>
       <br />
       <StarRating rating={5} size={24} colour={['#FF0000', '#FF6F00', '#FFA500', '#FFD700', '#00FF00']} />
       <div className='claimPerStar'>
         <div className='star1'>
           <div>1</div>
-          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].rating).ratingsByStar[0].user_ratings}</div>
+          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].ratings).ratingsByStar[0].user_ratings}</div>
         </div>
         <div className='star2'>
           <div>2</div>
-          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].rating).ratingsByStar[1].user_ratings}</div>
+          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].ratings).ratingsByStar[1].user_ratings}</div>
         </div>
         <div className='star3'>
           <div>3</div>
-          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].rating).ratingsByStar[2].user_ratings}</div>
+          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].ratings).ratingsByStar[2].user_ratings}</div>
         </div>
         <div className='star4'>
           <div>4</div>
-          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].rating).ratingsByStar[3].user_ratings}</div>
+          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].ratings).ratingsByStar[3].user_ratings}</div>
         </div>
         <div className='star5'>
           <div>5</div>
-          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].rating).ratingsByStar[4].user_ratings}</div>
+          <div>{CalculateRatingsByStar(article.claim_evidence[parseInt(id)].ratings).ratingsByStar[4].user_ratings}</div>
         </div>
       </div>
     </div>
