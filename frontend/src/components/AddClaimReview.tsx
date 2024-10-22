@@ -51,7 +51,9 @@ const AddClaimReview = () => {
       throw error('Failed to provide a rating value', 400);
     }
 
-    articleRatings = article?.claim_evidence?.[id]?.rating ?? [];
+    const ce = article?.claim_evidence ?? [];
+    articleRatings = (ce?.length > 0) ? ce[id]?.rating : [];
+
     articleRatings.push(uiRating);
     setArticle({ ...article, ['claim_evidence']: id, ['ratings']: articleRatings });
 
@@ -65,7 +67,9 @@ const AddClaimReview = () => {
   };
 
   let hasRatings = (): boolean => {
-    return article?.claim_evidence?.[id]?.rating?.length > 0;
+    const ce = article?.claim_evidence ?? [];
+    articleRatings = (ce?.length > 0) ? ce[id]?.rating : [];
+    return (ce?.length > 0) ? ce[id]?.rating?.length > 0 : false;
   };
 
   const StarRatingLayout = (hasRatings() === false) ? (
