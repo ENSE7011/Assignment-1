@@ -84,15 +84,15 @@ const AddClaimReview = () => {
       <h1 className="display-4 text-center">Claim Stats</h1>
       <div className='meanBox'>
         <div>Mean</div>
-        <StarRating rating={CalculateRatingAverages(article?.claim_evidence[parseInt(id)]?.ratings ?? []).mean_rating} size={24} color={['#3399FF']} />
+        <StarRating rating={CalculateRatingAverages(article?.claim_evidence?.[parseInt(id)]?.ratings ?? []).mean_rating} size={24} color={['#3399FF']} />
       </div>
       <div className='medianBox'>
         <div>Median</div>
-        <StarRating rating={CalculateRatingAverages(article?.claim_evidence[parseInt(id)]?.ratings ?? []).median_rating} size={24} color={['#3366FF']} />
+        <StarRating rating={CalculateRatingAverages(article?.claim_evidence?.[parseInt(id)]?.ratings ?? []).median_rating} size={24} color={['#3366FF']} />
       </div>s
       <div className='modeBox'>
         <div>Mode</div>
-        <StarRating rating={CalculateRatingAverages(article?.claim_evidence[parseInt(id)]?.ratings ?? []).mode_rating} size={24} color={['#0033FF']} />
+        <StarRating rating={CalculateRatingAverages(article?.claim_evidence?.[parseInt(id)]?.ratings ?? []).mode_rating} size={24} color={['#0033FF']} />
       </div>
       <br />
       <StarRating rating={5} size={24} colour={['#FF0000', '#FF6F00', '#FFA500', '#FFD700', '#00FF00']} />
