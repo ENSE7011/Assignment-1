@@ -36,15 +36,6 @@ export default ClaimsCard = ({ claims, articleId }: ClaimProp) => {
     id: 0,
   }
 
-  useEffect(() => {
-    (async () => {
-      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`)
-        .then((res) => res.json())
-        .then((data) => setArticle(data))
-        .catch((err) => console.log('Error fetching article:', err));
-    })();
-  }, [articleId]);
-
   const onClick = async (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, {
       method: 'GET',

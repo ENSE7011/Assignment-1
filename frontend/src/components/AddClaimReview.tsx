@@ -65,10 +65,15 @@ export default AddClaimReview = () => {
   };
 
   let hasRatings = () => {
-    return article?.claim_evidence?.at(id)?.rating
+    return article?.claim_evidence?.at(id)?.rating?.length > 0
   }
 
-  const StarRatingLayout = ()(
+  const StarRatingLayout = (hasRatings() === false) ? (
+    <div className="col-md-8 m-auto">
+      <h1 className="display-4 text-center">Claim Stats</h1>
+      <div>This Claim has not been rated yet</div>
+    </div>
+  ) : (
     <div className="col-md-8 m-auto">
       <h1 className="display-4 text-center">Claim Stats</h1>
       <div className='meanBox'>
@@ -108,7 +113,7 @@ export default AddClaimReview = () => {
         </div>
       </div>
     </div>
-  )
+  );
 
   return (
     <div className="col-md-8 m-auto">
@@ -116,7 +121,7 @@ export default AddClaimReview = () => {
         Show Article List
       </Link>
       <br />
-
+      <StarRatingLayout />
       <br />
       <div className="col-md-8 m-auto">
         <h1 className="display-4 text-center">Rate Claim</h1>
