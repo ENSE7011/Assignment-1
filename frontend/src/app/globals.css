@@ -21,8 +21,7 @@
 /* Apply background and text colors */
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 /* Center and style the container */
@@ -65,11 +64,13 @@ body {
 .desc h2 {
   font-size: 1.2em;
   font-weight: 600;
+  color: #232629;
 }
 
 .desc h3,
 p {
   font-weight: 300;
+  color: #000000;
 }
 
 .desc h3 {
@@ -98,4 +99,81 @@ p {
   color: #ccc;
   font-size: 1.5em;
   margin-top: 30px;
+}
+
+.meanBox {
+  flex-direction: column;
+  display: flex;
+  color: #3399ff;
+  background-color: #091c2e;
+}
+.medianBox {
+  flex-direction: column;
+  display: flex;
+  color: #3366ff;
+  background-color: #091c2e;
+}
+.modeBox {
+  flex-direction: column;
+  display: flex;
+  color: #0033ff;
+  background-color: #091c2e;
+}
+
+.claimPerStar {
+  flex-direction: row;
+  display: flex;
+}
+
+.star1 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #300101;
+  border: 1em solid #ff0000;
+  background-color: #f5c3c3;
+}
+.star2 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #2e1401;
+  border: 1em solid #ff6f00;
+  background-color: #fdd0ae;
+}
+.star3 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #2c1d01;
+  border: 1em solid #ffa500;
+  background-color: #fae2b7;
+}
+.star4 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #312a01;
+  border: 1em solid #ffd700;
+  background-color: #f8edad;
+}
+.star5 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #012901;
+  border: 1em solid #00ff00;
+  background-color: #a4f5a4;
+}
+
+.claim-list-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.claim-item-flex {
+  flex: 1 1 calc(33.333% - 10px);
+  padding: 10px;
+  flex-direction: column;
+  display: flex;
 }
