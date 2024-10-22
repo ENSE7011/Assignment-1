@@ -65,8 +65,8 @@ const AddClaimReview = () => {
   };
 
   let hasRatings = (): boolean => {
-    return article?.claim_evidence ? [id]?.rating?.length > 0
-  }
+    return article?.claim_evidence?.[id]?.rating?.length > 0;
+  };
 
   const StarRatingLayout = (hasRatings() === false) ? (
     <div className="col-md-8 m-auto">
