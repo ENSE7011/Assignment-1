@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Article, DefaultEmptyArticle } from './Article';
+import { Article, DefaultEmptyArticle, Claim, Rating, Method, SubmissionStatus, Support, DefaultEmptyClaim, DefaultEmptyRating } from './Article';
 import Link from 'next/link';
+import { ClaimsCard } from './ClaimsCard'
 
 const UpdateArticleInfo = () => {
   const [article, setArticle] = useState < Article > (DefaultEmptyArticle);
@@ -20,20 +21,7 @@ const UpdateArticleInfo = () => {
   }, [id]);
 
   const onChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (event.target.name === "rating") {
-      updateRating(parseFloat(event.target.value));
-    } else if (event.target.name !== "rating_count") {
-      setArticle({ ...article, [event.target.name]: event.target.value });
-    }
-  };
-
-  const updateRating = (rating: number) => {
-    const old_rating = article.rating;
-    const old_rating_count = article.rating_count;
-
-    const new_rating = ((old_rating * old_rating_count) + rating) / (old_rating_count + 1);
-    setArticle({ ...article, ["rating"]: new_rating });
-    setArticle({ ...article, ["rating_count"]: old_rating_count + 1 });
+    setArticle({ ...article, [event.target.name]: event.target.value });
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -57,7 +45,7 @@ const UpdateArticleInfo = () => {
             </Link>
             <br />
             <h1 className="display-4 text-center">Edit Article</h1>
-            <p className="lead text-center">Update Article's Info</p>
+            <p className="lead text-center">Update Article&quot;s Info</p>
             <form noValidate onSubmit={onSubmit}>
               <div className="form-group">
                 <input
@@ -123,30 +111,14 @@ const UpdateArticleInfo = () => {
                   onChange={onChange}
                 />
               </div>
-              <div className="form-group">
-                <input
-                  type="number"
-                  placeholder="Article Rating"
-                  name="rating"
-                  className="form-control"
-                  value={article.rating}
-                  onChange={onChange}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="number"
-                  placeholder="Article Rating Count"
-                  name="rating_count"
-                  className="form-control"
-                  value={article.rating_count}
-                />
-              </div>
               <br />
               <button type="submit" className="btn btn-outline-info btn-lg btn-block">
                 Update Article
               </button>
             </form>
+            <br />
+            <h1 className="display-4 text-center">Claims</h1>
+            <ClaimsCard claims={article.claim_evidence} articleId={article.id} />
           </div>
         </div>
       </div>

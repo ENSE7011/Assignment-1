@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { Article } from './Article';
 
 export default function ShowArticleList() {
-  const [Articles, setArticles] = useState < Article[] > ([]);
+  const [articles, setArticles] = useState < Article[] > ([]);
 
   useEffect(() => {
     (async () => {
@@ -27,10 +27,10 @@ export default function ShowArticleList() {
     })();
   }, []);
 
-  const ArticleList = Articles.length === 0 ? (
+  const ArticleList = articles.length === 0 ? (
     <p>There is no Article record!</p>
   ) : (
-    Articles.map((Article, k) => <ArticleCard article={Article} key={k} />)
+    articles.map((article, k) => <ArticleCard article={article} key={k} />)
   );
 
   return (

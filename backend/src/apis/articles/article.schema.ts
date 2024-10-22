@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Date, HydratedDocument } from 'mongoose';
+import { Claim, SubmissionStatus } from './article-supplimentary';
 
 export type ArticleDocument = HydratedDocument<Article>;
 
@@ -29,11 +30,20 @@ export class Article {
   @Prop({ required: true, type: Date, default: Date.now() })
   updated_date: Date;
 
-  @Prop()
-  rating?: number;
+  @Prop({
+    required: true,
+    default: SubmissionStatus.Submitted,
+  })
+  status: string;
+
+  @Prop({ required: true, type: Array<Claim>, default: Array<Claim>() })
+  claim_evidence: Claim[];
 
   @Prop({ required: true })
-  rating_count: number;
+  user_submitter: string;
+
+  @Prop()
+  user_moderator: string;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);
