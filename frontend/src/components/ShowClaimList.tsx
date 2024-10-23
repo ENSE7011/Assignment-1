@@ -34,7 +34,7 @@ export default function ShowClaimList() {
   const ClaimList = claims.length === 0 ? (
     <p>There are no claims!</p>
   ) : (
-    claims.map((c: Claim, k: ReactKey, index: number) => <ClaimsCard claim={c} key={k} index={index} />)
+    claims.map((c: Claim, index: number, article?.claim_evidence: Claim[], k: ReactKey) => <ClaimsCard claim={c} key={k} index={index} />)
   );
 
   return (
