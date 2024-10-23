@@ -3,9 +3,7 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Article, DefaultEmptyArticle, Claim, Rating, Method, SubmissionStatus, Support, DefaultEmptyClaim, DefaultEmptyRating } from './Article';
-import { CalculateRatingAverages, CalculateRatingsByStar } from './RatingCalculations';
 import { error } from 'console';
-import StarRating from './StarRating';
 import Link from 'next/link';
 
 interface ClaimReviewProp {
@@ -34,13 +32,14 @@ const AddClaimReview = () => {
         .then((res) => res.json())
         .then((data) => {
           setArticle(data);
-          setClaim(article.claim_evidence[id]);
+          if (article && (article?.claim_evidence?.length > 0)) {
+            setClaim(article.claim_evidence[id]);
+          }
         })
         .catch((err) => console.log('Error fetching article or claim:', err));
     })();
   }, [articleId, id]);
 
-  // TODO: get users
   const UpdateRating = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (event.target.name === "user") {
       uiRating.user = event.target.value;

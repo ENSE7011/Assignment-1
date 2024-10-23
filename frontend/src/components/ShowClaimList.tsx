@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { Article, DefaultEmptyArticle, Claim, Rating, Method, SubmissionStatus, Support, DefaultEmptyClaim, DefaultEmptyRating } from './Article';
-import { CalculateRatingAverages } from './RatingCalculations';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
+import { Article, DefaultEmptyArticle, Claim, DefaultEmptyClaim } from './Article';
 import ClaimsCard from './ClaimsCard';
+import Link from 'next/link';
+
 
 export default function ShowClaimList() {
   const [article, setArticle] = useState < Article > (DefaultEmptyArticle);

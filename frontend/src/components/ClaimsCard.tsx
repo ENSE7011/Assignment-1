@@ -4,7 +4,6 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Claim, Rating, Method, SubmissionStatus, Support, DefaultEmptyClaim, DefaultEmptyRating, GetSupportString } from './Article';
 import { CalculateRatingAverages } from './RatingCalculations';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
