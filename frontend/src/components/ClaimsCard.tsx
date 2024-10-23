@@ -26,14 +26,15 @@ const ClaimsCard = ({ claim, index }: ClaimProp) => {
   const onClick = async (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}/claim`, {
       method: 'GET',
-      body: {
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         "method": claim.method,
         "support": claim.support,
         "volume": claim.volume,
         "journal_number": claim.journal_number,
         "pages": claim.pages,
         "user_analyst": claim.user_analyst
-      }
+      })
     })
       .then((res) => router.push(`/add-rating/${articleId}/claims/${index}`))
       .catch((err) => console.log('Error updating article ratings:', err));
