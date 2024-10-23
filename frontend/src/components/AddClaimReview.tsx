@@ -36,7 +36,7 @@ export default function AddClaimReview() {
         })
         .then((res) => {
           const ce = article?.claim_evidence;
-          setClaim(ce?.at(id) ?? DefaultEmptyClaim);
+          setClaim(ce?.at(parseInt(id)) ?? DefaultEmptyClaim);
         })
         .catch((err) => console.log('Error fetching article or claim:', err));
     })();
