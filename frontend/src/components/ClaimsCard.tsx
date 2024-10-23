@@ -47,7 +47,7 @@ const ClaimsCard = ({ claim, index }: ClaimProp) => {
 
   let hasRatings = (): Rating[] | null => {
     if (!claim) { return null }
-    articleRatings = claim?.ratings ?? [];
+    const articleRatings = claim?.ratings ?? [];
     return (articleRatings.length > 0) ? articleRatings : null;
   };
 
