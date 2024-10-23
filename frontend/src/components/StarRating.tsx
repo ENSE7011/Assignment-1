@@ -34,7 +34,7 @@ const StarRating = ({ rating, size, colour }) => {
           />
         );
       })}
-      <span className="ms-2">{rating.toFixed(1)} / 5.0</span>
+      <span className="ms-2">{rating.toFixed(2)} / 5.0</span>
     </div>
   );
 };

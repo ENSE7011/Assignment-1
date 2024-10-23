@@ -177,3 +177,9 @@ p {
   flex-direction: column;
   display: flex;
 }
+
+.sub {
+  font-weight: 300;
+  color: #505050;
+  font-style: italic;
+}

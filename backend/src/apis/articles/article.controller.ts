@@ -11,6 +11,8 @@ import {
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './create-article.dto';
+import { FindClaimDto } from './find-claim.dto';
+import { CreateReviewDto } from './create-review.dto';
 import { error } from 'console';
 import * as mongo from 'mongodb';
 
@@ -96,12 +98,53 @@ export class ArticleController {
   @Delete('/:id')
   async deleteArticle(@Param('id') id: string) {
     try {
-      return await await this.articleService.delete(id);
+      return await this.articleService.delete(id);
     } catch {
       throw new HttpException(
         {
           status: HttpStatus.NOT_FOUND,
           error: 'No such a article',
+        },
+        HttpStatus.NOT_FOUND,
+        { cause: error },
+      );
+    }
+  }
+
+  @Get('/:id/claims')
+  async getClaims(@Param('id') id: string) {
+    try {
+      const article = await this.articleService.findOne(id);
+      return article.claim_evidence;
+    } catch {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: `Cannot get article claims for article ${id}`,
+        },
+        HttpStatus.NOT_FOUND,
+        { cause: error },
+      );
+    }
+  }
+
+  @Get('/:id/claim')
+  async findClaim(@Param('id') id: string, @Body() findClaimDto: FindClaimDto) {
+    try {
+      const article = await this.articleService.findOne(id);
+      return article.claim_evidence.find((cv) => {
+        cv.method === findClaimDto.method &&
+          cv.support === findClaimDto.support &&
+          cv.volume === findClaimDto.volume &&
+          cv.journal_number === findClaimDto.journal_number &&
+          cv.pages === findClaimDto.pages &&
+          cv.user_analyst === findClaimDto.user_analyst;
+      });
+    } catch {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: `Cannot find article claim for article ${id} and claim evidence ${findClaimDto}`,
         },
         HttpStatus.NOT_FOUND,
         { cause: error },

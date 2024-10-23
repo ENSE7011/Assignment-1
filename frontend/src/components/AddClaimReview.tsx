@@ -19,22 +19,26 @@ interface ArticleProp {
 }
 
 const AddClaimReview = () => {
+  const router = useRouter();
   const [article, setArticle] = useState < Article > (DefaultEmptyArticle);
+  const [claim, setClaim] = useState < Claim > (DefaultEmptyClaim);
   const { articleId, id } = useParams < { articleId: string, id: string } > ();
+
   let articleRatings: Rating[];
   let uiRating: Rating = DefaultEmptyRating;
-
-  const router = useRouter();
 
 
   useEffect(() => {
     (async () => {
       await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`)
         .then((res) => res.json())
-        .then((data) => setArticle(data))
-        .catch((err) => console.log('Error fetching article:', err));
+        .then((data) => {
+          setArticle(data);
+          setClaim(article.claim_evidence[id]);
+        })
+        .catch((err) => console.log('Error fetching article or claim:', err));
     })();
-  }, [articleId]);
+  }, [articleId, id]);
 
   // TODO: get users
   const UpdateRating = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -47,16 +51,11 @@ const AddClaimReview = () => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!uiRating.user || !uiRating.rating) {
+    if (!uiRating.user || !uiRating.rating || !claim) {
       throw error('Failed to provide a rating value', 400);
     }
-
-    const ce: Claim[] = article?.claim_evidence ?? [];
-    articleRatings = (ce?.length > 0) ? ce[parseInt(id)]?.ratings : [];
-
-    articleRatings.push(uiRating);
-    ce[parseInt(id)].ratings = articleRatings;
-    setArticle({ ...article, ['claim_evidence']: ce });
+    claim.ratings.push(uiRating);
+    setArticle({ ...article, ['claim_evidence']: claim });
 
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, {
       method: 'PUT',
@@ -67,107 +66,45 @@ const AddClaimReview = () => {
       .catch((err) => console.log('Error updating article:', err));
   };
 
-  let hasRatings = (): Rating[] | null => {
-    const ce: Claim[] = article?.claim_evidence ?? [];
-    const tempId = parseInt(id ?? "-1");
-    articleRatings = (ce?.length > 0) ? ce[tempId]?.ratings : [];
-    return (ce?.length > 0) ? (ce[tempId]?.ratings?.length > 0 ? ce[tempId]?.ratings : null) : null;
-  };
-
-  const StarRatingLayout = (): React.JSX.Element => {
-    if (!hasRatings()) {
-      return (
-        <div className="col-md-8 m-auto">
-          <h1 className="display-4 text-center">Claim Stats</h1>
-          <div>This Claim has not been rated yet</div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="col-md-8 m-auto">
-          <h1 className="display-4 text-center">Claim Stats</h1>
-          <div className='meanBox'>
-            <div>Mean</div>
-            <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).mean_rating} size={24} colour={['#3399FF']} />
-          </div>
-          <div className='medianBox'>
-            <div>Median</div>
-            <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).median_rating} size={24} colour={['#3366FF']} />
-          </div>s
-          <div className='modeBox'>
-            <div>Mode</div>
-            <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).mode_rating} size={24} colour={['#0033FF']} />
-          </div>
-          <br />
-          <StarRating rating={5} size={24} colour={['#FF0000', '#FF6F00', '#FFA500', '#FFD700', '#00FF00']} />
-          <div className='claimPerStar'>
-            <div className='star1'>
-              <div>1</div>
-              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[0].user_ratings}</div>
-            </div>
-            <div className='star2'>
-              <div>2</div>
-              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[1].user_ratings}</div>
-            </div>
-            <div className='star3'>
-              <div>3</div>
-              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[2].user_ratings}</div>
-            </div>
-            <div className='star4'>
-              <div>4</div>
-              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[3].user_ratings}</div>
-            </div>
-            <div className='star5'>
-              <div>5</div>
-              <div>{CalculateRatingsByStar(hasRatings() ?? []).ratingsByStar[4].user_ratings}</div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-  }
-
   return (
-    <div className="col-md-8 m-auto">
-      <Link href="/" className="btn btn-outline-warning float-left">
-        Show Article List
-      </Link>
-      <br />
-      <StarRatingLayout />
-      <br />
+    <div className='AddClaimReview'>
       <div className="col-md-8 m-auto">
-        <h1 className="display-4 text-center">Rate Claim</h1>
-        <form noValidate onSubmit={onSubmit}>
-          <div className="form-group">
-            <input
-              type="number"
-              placeholder="Article Rating"
-              name="rating"
-              className="form-control"
-              value={uiRating.rating}
-              onChange={UpdateRating}
-            />
-          </div>
-          <br />
-          <div className="form-group">
-            <input
-              type="string"
-              placeholder="User Name"
-              name="user"
-              className="form-control"
-              value={uiRating.user}
-              onChange={UpdateRating}
-            />
-          </div>
-          <br />
-          <button type="submit" className="btn btn-outline-info btn-lg btn-block">
-            Submit Article Rating
-          </button>
-        </form>
+        <Link href="/" className="btn btn-outline-warning float-left">
+          Show Article List
+        </Link>
+        <br />
+        <div className="col-md-8 m-auto">
+          <h1 className="display-4 text-center">Rate Claim</h1>
+          <form noValidate onSubmit={onSubmit}>
+            <div className="form-group">
+              <input
+                type="number"
+                placeholder="Article Rating"
+                name="rating"
+                className="form-control"
+                value={uiRating.rating}
+                onChange={UpdateRating}
+              />
+            </div>
+            <br />
+            <div className="form-group">
+              <input
+                type="string"
+                placeholder="User Name"
+                name="user"
+                className="form-control"
+                value={uiRating.user}
+                onChange={UpdateRating}
+              />
+            </div>
+            <br />
+            <button type="submit" className="btn btn-outline-info btn-lg btn-block">
+              Submit Article Rating
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  )
-}
 
-AddClaimReview.displayName = 'AddClaimReview';
-export default AddClaimReview;
+  );
+}

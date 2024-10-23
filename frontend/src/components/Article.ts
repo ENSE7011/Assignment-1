@@ -27,11 +27,17 @@ export enum Support {
   StrongAgainst = -2,
 }
 
+export function GetSupportString(support: Support | number): string {
+  let keyStr = Support[support]
+  return keyStr.replace(/([A-Z])/g, " $1").trim()
+}
+
 export type Rating = {
   rating: number
   user: string
 }
 
+// TODO: PAGES
 export type Claim = {
   method: string
   support: number
@@ -44,8 +50,8 @@ export type Claim = {
 
 export enum SubmissionStatus {
   Submitted = "Submitted",
-  ModReview = "ModReview",
-  AnalystReview = "AnalystReview",
+  ModReview = "Mod Review",
+  AnalystReview = "Analyst Review",
   Success = "Success",
   Reject = "Reject",
 }

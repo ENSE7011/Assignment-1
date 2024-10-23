@@ -1,3 +1,4 @@
+import { Claim } from './article-supplimentary';
 export class CreateArticleDto {
   _id: string;
   title: string;
@@ -6,7 +7,7 @@ export class CreateArticleDto {
   description?: string;
   published_year: string;
   journal: string;
-  updated_date: number;
-  rating?: number;
-  rating_count: number;
+  claim_evidence: Claim[];
+  user_submitter?: string;
+  user_moderator?: string;
 }

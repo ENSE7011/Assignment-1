@@ -116,9 +116,6 @@ const UpdateArticleInfo = () => {
                 Update Article
               </button>
             </form>
-            <br />
-            <h1 className="display-4 text-center">Claims</h1>
-            <ClaimsCard claims={article.claim_evidence} articleId={article.id} />
           </div>
         </div>
       </div>

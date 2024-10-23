@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { Article, DefaultEmptyArticle } from "./Article"
+import { Article, DefaultEmptyArticle, Claim } from "./Article"
+import ShowClaimList from "./ShowClaimList"
 import Link from "next/link"
 
 
@@ -15,9 +16,8 @@ const ShowArticleDetails = () => {
 
   useEffect(() => {
     async () => {
-      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`)
+      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, { method: "GET" })
         .then((res) => {
-          console.log("response: ", res.json());
           return res.json();
         })
         .then((data) => {
@@ -40,7 +40,7 @@ const ShowArticleDetails = () => {
   }
 
   const onClick = async () => {
-    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`)
+    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, { method: "GET" })
       .then((res) => {
         navigate.push(`/show-article/${id}`);
       })
@@ -103,6 +103,9 @@ const ShowArticleDetails = () => {
               </table>
             </div>
           </div>
+          <br />
+          <div>{ShowClaimList()}</div>
+          <br />
           <div className="col-md-6 m-auto">
             <button
               type="button"
