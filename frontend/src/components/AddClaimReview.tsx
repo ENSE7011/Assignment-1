@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { Article, DefaultEmptyArticle, Claim, Rating, Method, SubmissionStatus, Support, DefaultEmptyClaim, DefaultEmptyRating } from './Article';
 import { error } from 'console';
 import Link from 'next/link';
+import { isArray } from 'mathjs';
 
 interface ClaimReviewProp {
   id: string,
@@ -32,7 +33,10 @@ export default function AddClaimReview() {
         .then((res) => res.json())
         .then((data) => {
           setArticle(data);
-          setClaim(article?.claim_evidence[id] ?? DefaultEmptyClaim);
+        })
+        .then((res) => {
+          const ce = article?.claim_evidence;
+          setClaim(ce?.at(id) ?? DefaultEmptyClaim);
         })
         .catch((err) => console.log('Error fetching article or claim:', err));
     })();
