@@ -101,8 +101,8 @@ const ClaimsCard = ({ claim, index }: ClaimProp) => {
   // TODO: add review button if failure
 
   return (
-    <Tab.Container className='ClaimsCard' defaultActiveKey="CO">
-      <Card className='card-container'>
+    <Card className='ClaimsCard card-container'>
+      <Tab.Container defaultActiveKey="CO">
         <Card.Header>
           <Nav variant="pills">
             <Nav.Item>
@@ -131,8 +131,8 @@ const ClaimsCard = ({ claim, index }: ClaimProp) => {
             </Tab.Pane>
           </Tab.Content>
         </Card.Body>
-      </Card>
-    </Tab.Container>
+      </Tab.Container>
+    </Card>
   );
 }
 
