@@ -60,7 +60,7 @@ export default function AddClaimReview() {
     if (!articleClaims) {
       throw error('no claims', 400);
     }
-    articleClaims[id] = claim;
+    articleClaims[parseFloat(id)] = claim;
     setArticle({ ...article, ['claim_evidence']: articleClaims });
 
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, {
