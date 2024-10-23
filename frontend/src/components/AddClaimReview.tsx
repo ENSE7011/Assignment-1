@@ -16,7 +16,7 @@ interface ArticleProp {
   article?: Article,
 }
 
-export default AddClaimReview = () => {
+export default function AddClaimReview() {
   const router = useRouter();
   const [article, setArticle] = useState < Article > (DefaultEmptyArticle);
   const [claim, setClaim] = useState < Claim > (DefaultEmptyClaim);
@@ -66,44 +66,41 @@ export default AddClaimReview = () => {
   };
 
   return (
-    <div className='AddClaimReview'>
+    <div className="AddClaimReview col-md-8 m-auto">
+      <Link href="/" className="btn btn-outline-warning float-left">
+        Show Article List
+      </Link>
+      <br />
       <div className="col-md-8 m-auto">
-        <Link href="/" className="btn btn-outline-warning float-left">
-          Show Article List
-        </Link>
-        <br />
-        <div className="col-md-8 m-auto">
-          <h1 className="display-4 text-center">Rate Claim</h1>
-          <form noValidate onSubmit={onSubmit}>
-            <div className="form-group">
-              <input
-                type="number"
-                placeholder="Article Rating"
-                name="rating"
-                className="form-control"
-                value={uiRating.rating}
-                onChange={UpdateRating}
-              />
-            </div>
-            <br />
-            <div className="form-group">
-              <input
-                type="string"
-                placeholder="User Name"
-                name="user"
-                className="form-control"
-                value={uiRating.user}
-                onChange={UpdateRating}
-              />
-            </div>
-            <br />
-            <button type="submit" className="btn btn-outline-info btn-lg btn-block">
-              Submit Article Rating
-            </button>
-          </form>
-        </div>
+        <h1 className="display-4 text-center">Rate Claim</h1>
+        <form noValidate onSubmit={onSubmit}>
+          <div className="form-group">
+            <input
+              type="number"
+              placeholder="Article Rating"
+              name="rating"
+              className="form-control"
+              value={uiRating.rating}
+              onChange={UpdateRating}
+            />
+          </div>
+          <br />
+          <div className="form-group">
+            <input
+              type="string"
+              placeholder="User Name"
+              name="user"
+              className="form-control"
+              value={uiRating.user}
+              onChange={UpdateRating}
+            />
+          </div>
+          <br />
+          <button type="submit" className="btn btn-outline-info btn-lg btn-block">
+            Submit Article Rating
+          </button>
+        </form>
       </div>
     </div>
-
   );
 }
