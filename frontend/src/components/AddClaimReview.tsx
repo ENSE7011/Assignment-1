@@ -32,9 +32,7 @@ export default function AddClaimReview() {
         .then((res) => res.json())
         .then((data) => {
           setArticle(data);
-          if (article && (article?.claim_evidence?.length > 0)) {
-            setClaim(article.claim_evidence[id]);
-          }
+          setClaim(article?.claim_evidence[id] ?? DefaultEmptyClaim);
         })
         .catch((err) => console.log('Error fetching article or claim:', err));
     })();
