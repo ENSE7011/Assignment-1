@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export default function ShowClaimList() {
   const [article, setArticle] = useState < Article > (DefaultEmptyArticle);
-  const [claims, setClaims] = useState < Claim[] > ([]);
+  const [claims, setClaims] = useState < Array < Claim > > ([]);
   const articleId = useParams < { id: string } > ().id;
 
   async function fetchArticleAndClaims() {
@@ -34,7 +34,7 @@ export default function ShowClaimList() {
   const ClaimList = claims.length === 0 ? (
     <p>There are no claims!</p>
   ) : (
-    claims.map((c, k, index) => <ClaimsCard claim={c} index={index} key={k} />)
+    claims.map((c: Claim, k: ReactKey, index: number) => <ClaimsCard claim={c} key={k} index={index} />)
   );
 
   return (
