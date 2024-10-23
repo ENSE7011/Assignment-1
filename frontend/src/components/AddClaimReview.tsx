@@ -16,7 +16,7 @@ interface ArticleProp {
   article?: Article,
 }
 
-const AddClaimReview = () => {
+export default AddClaimReview = () => {
   const router = useRouter();
   const [article, setArticle] = useState < Article > (DefaultEmptyArticle);
   const [claim, setClaim] = useState < Claim > (DefaultEmptyClaim);
