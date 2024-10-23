@@ -56,7 +56,12 @@ export default function AddClaimReview() {
       throw error('Failed to provide a rating value', 400);
     }
     claim.ratings.push(uiRating);
-    setArticle({ ...article, ['claim_evidence']: claim });
+    const articleClaims = article?.claim_evidence;
+    if (!articleClaims) {
+      throw error('no claims', 400);
+    }
+    articleClaims[id] = claim;
+    setArticle({ ...article, ['claim_evidence']: articleClaims });
 
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, {
       method: 'PUT',
