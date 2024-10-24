@@ -61,18 +61,18 @@ const ClaimsCard = ({ claim, index }: ClaimProp) => {
       <h1 className="display-4 text-center">Claim Stats</h1>
       <div className='meanBox'>
         <div>Mean</div>
-        <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).mean_rating} size={24} colour={['#3399FF']} />
+        <div>{StarRating(CalculateRatingAverages(hasRatings() ?? []).mean_rating, 24, ['#3399FF'])} </div>
       </div>
       <div className='medianBox'>
         <div>Median</div>
-        <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).median_rating} size={24} colour={['#3366FF']} />
+        <div>{StarRating(CalculateRatingAverages(hasRatings() ?? []).median_rating, 24, ['#3366FF'])} </div>
       </div>s
       <div className='modeBox'>
         <div>Mode</div>
-        <StarRating rating={CalculateRatingAverages(hasRatings() ?? []).mode_rating} size={24} colour={['#0033FF']} />
+        <div>{StarRating(CalculateRatingAverages(hasRatings() ?? []).mode_rating, 24, ['#0033FF'])} </div>
       </div>
       <br />
-      <StarRating rating={5} size={24} colour={['#FF0000', '#FF6F00', '#FFA500', '#FFD700', '#00FF00']} />
+      <div>{StarRating(5, 24, ['#FF0000', '#FF6F00', '#FFA500', '#FFD700', '#00FF00'])}</div>
       <div className='claimPerStar'>
         <div className='star1'>
           <div>1</div>
