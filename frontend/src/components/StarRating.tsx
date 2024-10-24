@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Rating } from './Article';
 import { FaStar } from 'react-icons/fa';
@@ -25,7 +27,7 @@ export default function StarRating(rating: number, size: number, colour: string[
   }
 
   return (
-    <div className="star-rating d-flex">
+    <div className="StarRating d-flex">
       {[...Array(totalStars)].map((_, index) => {
         const starRatingValue = index + 1;
         return (
