@@ -19,7 +19,9 @@ export default function StarRating(rating: number, size: number, colour: string[
       colourArray.push(colour[0]);
     }
   } else {
-    colourArray.push(colour);
+    colour.forEach((c) => {
+      colourArray.push(c);
+    })
   }
 
   return (
