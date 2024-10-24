@@ -1,8 +1,9 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { Rating } from './Article';
 import { FaStar } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const StarRating = ({ rating, size, colour }) => {
+const StarRating = ({ rating: Rating[], size: number, colour: string }) => {
   const totalStars = 5;
 
   let colourArray: string[];
