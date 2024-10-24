@@ -7,8 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function StarRating(rating: number, size: number, colour: string[]) {
   const totalStars = 5;
+  const colourArray: Array<string> = colour;
 
-  let colourArray: string[];
   if (colour.length === 1) {
     for (let c = 0; c < totalStars; c++) {
       colourArray.push(colour[0]);
@@ -16,7 +16,9 @@ export default function StarRating(rating: number, size: number, colour: string[
   }
 
   if ((colourArray.length === 0) && (colour.length < totalStars)) {
-    colourArray.push(colour);
+    colour.forEach((c) => {
+      colourArray.push(c);
+    })
     for (let c = colour.length; c < totalStars; c++) {
       colourArray.push(colour[0]);
     }
