@@ -4,7 +4,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Article, DefaultEmptyArticle, Claim, Rating, Method, SubmissionStatus, Support, DefaultEmptyClaim, DefaultEmptyRating } from './Article';
 import Link from 'next/link';
-import { ClaimsCard } from './ClaimsCard'
+import ClaimsCard from './ClaimsCard';
 
 const UpdateArticleInfo = () => {
   const [article, setArticle] = useState < Article > (DefaultEmptyArticle);
