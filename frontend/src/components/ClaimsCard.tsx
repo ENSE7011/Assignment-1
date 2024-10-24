@@ -69,7 +69,7 @@ const ClaimsCard = ({ claim, index }: ClaimProp) => {
       </div>s
       <div className='modeBox'>
         <div>Mode</div>
-        <div>{StarRating(CalculateRatingAverages(hasRatings() ?? []).mode_rating, 24, ['#0033FF'])} </div>
+        <div>{StarRating(CalculateRatingAverages(hasRatings() ?? []).mode_rating[0], 24, ['#0033FF'])} </div>
       </div>
       <br />
       <div>{StarRating(5, 24, ['#FF0000', '#FF6F00', '#FFA500', '#FFD700', '#00FF00'])}</div>
