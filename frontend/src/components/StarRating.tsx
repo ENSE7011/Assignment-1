@@ -3,7 +3,7 @@ import { Rating } from './Article';
 import { FaStar } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const StarRating = ({ rating: Rating[], size: number, colour: string }) => {
+export default function StarRating(rating: number, size: number, colour: string[]) {
   const totalStars = 5;
 
   let colourArray: string[];
@@ -39,5 +39,3 @@ const StarRating = ({ rating: Rating[], size: number, colour: string }) => {
     </div>
   );
 };
-
-export default StarRating;
