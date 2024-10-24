@@ -31,7 +31,7 @@ export default function StarRating(rating: number, size: number, colour: string[
             key={index}
             className="star"
             size={size}
-            color={starRatingValue <= rating ? colour : '#e4e5e9'} // Gold if filled, gray if empty  '#ffc107'
+            color={starRatingValue <= rating ? colourArray[index] : '#e4e5e9'} // Gold if filled, gray if empty  '#ffc107'
           />
         );
       })}
