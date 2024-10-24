@@ -10,7 +10,12 @@ export default function ShowArticleList() {
 
   useEffect(() => {
     (async () => {
-      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/apis/articles')
+      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/apis/articles', {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           // Ensure that the fetched data is an array before setting it to state

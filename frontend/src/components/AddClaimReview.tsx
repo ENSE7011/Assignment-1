@@ -29,7 +29,12 @@ export default function AddClaimReview() {
 
   useEffect(() => {
     (async () => {
-      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`)
+      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           setArticle(data);

@@ -12,7 +12,12 @@ const UpdateArticleInfo = () => {
 
   useEffect(() => {
     (async () => {
-      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`)
+      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        },
+      })
         .then((res) => res.json())
         .then((data) => setArticle(data))
         .catch((err) => console.log('Error fetching article:', err));
