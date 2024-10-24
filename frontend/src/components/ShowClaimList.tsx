@@ -13,7 +13,7 @@ export default function ShowClaimList() {
   const articleId = useParams < { id: string } > ().id;
 
   async function fetchArticleAndClaims() {
-    const [articleResponse, claimsResponse] = await Promise.all([fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, { method: "GET" }), fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}/claims`, { method: "GET" })])
+    const [articleResponse, claimsResponse] = await Promise.all([fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}`, { method: "GET", headers: { "Access-Control-Allow-Origin": "*" } }), fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}/claims`, { method: "GET", headers: { "Access-Control-Allow-Origin": "*" } })])
     const [articleJson, claimsJson] = await Promise.all([articleResponse.json(), claimsResponse.json()]);
     return [articleJson, claimsJson];
   }

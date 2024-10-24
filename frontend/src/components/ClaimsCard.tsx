@@ -26,7 +26,10 @@ const ClaimsCard = ({ claim, index }: ClaimProp) => {
   const onClick = async (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${articleId}/claim`, {
       method: 'GET',
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
       body: JSON.stringify({
         "method": claim.method,
         "support": claim.support,

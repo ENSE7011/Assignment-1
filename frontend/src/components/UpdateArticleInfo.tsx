@@ -27,7 +27,10 @@ const UpdateArticleInfo = () => {
     event.preventDefault();
     await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, {
       method: 'PUT',
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
       body: JSON.stringify(article)
     })
       .then(() => router.push(`/show-article/${id}`))

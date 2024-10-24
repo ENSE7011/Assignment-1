@@ -16,7 +16,7 @@ const ShowArticleDetails = () => {
 
   useEffect(() => {
     async () => {
-      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, { method: "GET" })
+      await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, { method: "GET", headers: { "Access-Control-Allow-Origin": "*" } })
         .then((res) => {
           return res.json();
         })
@@ -30,7 +30,7 @@ const ShowArticleDetails = () => {
   }, [id])
 
   const onDeleteClick = async (id: string) => {
-    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, { method: "DELETE" })
+    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, { method: "DELETE", headers: { "Access-Control-Allow-Origin": "*" } })
       .then((res) => {
         navigate.push("/")
       })
@@ -40,7 +40,7 @@ const ShowArticleDetails = () => {
   }
 
   const onClick = async () => {
-    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, { method: "GET" })
+    await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/apis/articles/${id}`, { method: "GET", headers: { "Access-Control-Allow-Origin": "*" } })
       .then((res) => {
         navigate.push(`/show-article/${id}`);
       })
