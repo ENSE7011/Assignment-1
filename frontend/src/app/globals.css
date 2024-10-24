@@ -1,7 +1,9 @@
+/* Tailwind CSS imports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Root color variables for light and dark modes */
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -16,77 +18,168 @@
   }
 }
 
+/* Apply background and text colors */
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Center and style the container */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
-.collapse.show {
-  visibility: visible;
-}
-.CreateBook {
-  background-color: #2c3e50;
-  min-height: 100vh;
-  color: white;
-}
-.ShowBookDetails {
-  background-color: #2c3e50;
-  min-height: 100vh;
-  color: white;
-}
-.UpdateBookInfo {
-  background-color: #2c3e50;
-  min-height: 100vh;
-  color: white;
-}
-.ShowBookList {
-  background-color: #2c3e50;
-  height: 100%;
-  width: 100%;
-  min-height: 100vh;
-  min-width: 100px;
-  color: white;
-}
-/* BookList Styles */
+/* Make the grid flexible for book cards */
 .list {
   display: grid;
-  margin: 20px 0 50px 0;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: 1fr;
-  grid-gap: 2em;
+  gap: 2em;
+  margin-top: 30px;
+  padding: 20px;
 }
+
+/* Card style */
 .card-container {
-  width: 250px;
-  border: 1px solid rgba(0, 0, 0.125);
-  margin: 0 auto;
-  border-radius: 5px;
+  background-color: #fff;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  transition: transform 0.2s;
 }
+
+.card-container:hover {
+  transform: scale(1.05);
+}
+
+/* Description styles */
 .desc {
-  height: 130px;
   padding: 10px;
 }
+
 .desc h2 {
-  font-size: 1em;
-  font-weight: 400;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #232629;
 }
+
 .desc h3,
 p {
   font-weight: 300;
+  color: #000000;
 }
+
 .desc h3 {
   color: #6c757d;
-  font-size: 1em;
-  padding: 10px 0 10px 0;
+  margin: 10px 0;
+}
+
+/* Button styles */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* No records text styling */
+.no-records {
+  text-align: center;
+  color: #ccc;
+  font-size: 1.5em;
+  margin-top: 30px;
+}
+
+.meanBox {
+  flex-direction: column;
+  display: flex;
+  color: #3399ff;
+  background-color: #091c2e;
+}
+.medianBox {
+  flex-direction: column;
+  display: flex;
+  color: #3366ff;
+  background-color: #091c2e;
+}
+.modeBox {
+  flex-direction: column;
+  display: flex;
+  color: #0033ff;
+  background-color: #091c2e;
+}
+
+.claimPerStar {
+  flex-direction: row;
+  display: flex;
+}
+
+.star1 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #300101;
+  border: 1em solid #ff0000;
+  background-color: #f5c3c3;
+}
+.star2 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #2e1401;
+  border: 1em solid #ff6f00;
+  background-color: #fdd0ae;
+}
+.star3 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #2c1d01;
+  border: 1em solid #ffa500;
+  background-color: #fae2b7;
+}
+.star4 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #312a01;
+  border: 1em solid #ffd700;
+  background-color: #f8edad;
+}
+.star5 {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  color: #012901;
+  border: 1em solid #00ff00;
+  background-color: #a4f5a4;
+}
+
+.claim-list-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.claim-item-flex {
+  flex: 1 1 calc(33.333% - 10px);
+  padding: 10px;
+  flex-direction: column;
+  display: flex;
+}
+
+.sub {
+  font-weight: 300;
+  color: #505050;
+  font-style: italic;
 }
