@@ -5,8 +5,9 @@ import * as bodyParser from 'body-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'https://assign-1-frontend-preview.vercel.app/',
-    credentials: true,
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: false,
   });
   app.use(bodyParser.json());
   const port = process.env.PORT || 8082;
